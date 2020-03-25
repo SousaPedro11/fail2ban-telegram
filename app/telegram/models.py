@@ -5,10 +5,12 @@ from flask_restful import Resource
 from telegram import Bot
 
 from app.telegram import filters
-from app.util import get_ip, country_ip, find_in_request
+from app.util import get_ip, country_ip
 
 chat_id = os.environ.get('CHAT_ID')
 token = os.environ.get('TOKEN')
+print(token)
+print(chat_id)
 bot = Bot(token=str(token))
 
 
