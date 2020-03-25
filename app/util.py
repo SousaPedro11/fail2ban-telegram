@@ -1,4 +1,5 @@
 import re
+from ipaddress import ip_address
 
 import requests
 from flask import request
@@ -14,7 +15,7 @@ def get_ip(request):
     return ip
 
 
-def country_ip(ip):
+def country_ip(ip) -> str:
     r = requests.get('http://ip-api.com/json/' + ip)
     parsed_json = r.json()
 
@@ -29,8 +30,8 @@ def find_in_request(filtro):
 
 
 def verify_ip_format(ip):
-    filtro = '\d{1,4}\.\d{1,4}\.\d{1,4}\.\d{1,4}'
-    findall = re.compile(filtro).findall(ip)
-    if not findall:
-        raise BadRequest(f'invalid ip {ip} in post data')
-    return findall[0]
+    try:
+        result = ip_address(ip)
+    except Exception as e:
+        raise BadRequest(f'Invalid input. {str(e)}')
+    return result

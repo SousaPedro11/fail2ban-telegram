@@ -1,4 +1,3 @@
-import json
 import os
 
 from flask import request, jsonify
@@ -24,8 +23,8 @@ class Telegram(Resource):
         return jsonify(texto)
 
     def post(self):
-        req = request.content_type
-        texto = filters.filtro_post(req)
+        request_type = request.content_type
+        texto = filters.filtro_post(request_type)
 
         texto = dict(sorted(texto.items(), key=lambda x: x[0]))
 

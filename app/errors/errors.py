@@ -5,7 +5,7 @@ from werkzeug.exceptions import BadRequest
 from app import app
 
 
-@app.errorhandler(BadRequest)
+@app.errorhandler(500)
 def handle_exception(e):
     """Return JSON instead of HTML for HTTP errors."""
     # start with the correct headers and status code from the error
