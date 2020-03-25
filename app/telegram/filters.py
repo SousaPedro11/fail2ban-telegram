@@ -19,7 +19,7 @@ def filtro_post(content_type):
             texto.update(protocol=split_request[0])
             texto.update(origin_ip=verify_ip_format(split_request[1]))
             texto.update(target_ip=verify_ip_format(split_request[2]))
-            texto.update(country_origin=country_ip(split_request[1]))
+            texto.update(origin_country=country_ip(split_request[1]))
             return texto
 
         '''caso a entrada seja a linha de log do fail2ban'''
@@ -46,7 +46,7 @@ def filtro_post(content_type):
             texto.update(protocol=request_json['protocol'])
             texto.update(origin_ip=request_json['origin_ip'])
             texto.update(target_ip=request_json['target_ip'])
-            texto.update(country_origin=country_ip(request_json['origin_ip']))
+            texto.update(origin_country=country_ip(request_json['origin_ip']))
         except Exception:
             raise BadRequest(
                 'argumentos invalidos! Deve ser '

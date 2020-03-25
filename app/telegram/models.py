@@ -1,6 +1,7 @@
+import json
 import os
 
-from flask import request
+from flask import request, jsonify
 from flask_restful import Resource
 from telegram import Bot
 
@@ -16,10 +17,11 @@ class Telegram(Resource):
 
     def get(self):
         ip = get_ip(request)
-        texto = country_ip(ip)
+        texto = {}
+        texto.update(country_ip=country_ip(ip))
         texto.update(user_agent=request.user_agent.string)
         bot.send_message(chat_id=chat_id, text=texto)
-        return texto
+        return jsonify(texto)
 
     def post(self):
         req = request.content_type
@@ -28,4 +30,4 @@ class Telegram(Resource):
         texto = dict(sorted(texto.items(), key=lambda x: x[0]))
 
         bot.send_message(chat_id=chat_id, text=texto)
-        return texto
+        return jsonify(texto)
