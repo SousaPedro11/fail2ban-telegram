@@ -1,0 +1,1 @@
+web: gunicorn --workers=5 fail2ban:app
