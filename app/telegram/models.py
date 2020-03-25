@@ -9,8 +9,6 @@ from app.util import get_ip, country_ip
 
 chat_id = os.environ.get('CHAT_ID')
 token = os.environ.get('TOKEN')
-print(token)
-print(chat_id)
 bot = Bot(token=str(token))
 
 
