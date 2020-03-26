@@ -1,16 +1,37 @@
-FROM python:rc-alpine3.10
+FROM python:alpine
 
 LABEL maintainer="Pedro Sousa <ppls2106@gmail.com>"
 
-RUN apk update
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
-RUN apk add gcc musl-dev libffi-dev openssl-dev
+RUN rm -rf /var/cache/apk/* && \
+    apk update && \
+    apk add make && \
+    apk add build-base && \
+    apk add gcc && \
+    apk add libffi-dev && \
+    apk add musl-dev && \
+    apk add openssl-dev && \
+    apk del build-base && \
+    rm -rf /var/cache/apk/*
 
-RUN pip3 install --upgrade pip
+RUN pip install --upgrade pip
 
-WORKDIR /usr/src/app
+ENV HOME=/home/api
 
-COPY requirements.txt ./
+RUN adduser -D api
+
+WORKDIR $HOME
+
+COPY --chown=api:api . $HOME
+
+RUN chmod +x ./startup.sh
+
 RUN pip3 install --no-cache-dir -r requirements.txt
 
-COPY . .
+USER api
+
+EXPOSE 5000
+
+CMD ["./startup.sh"]
