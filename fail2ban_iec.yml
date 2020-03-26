@@ -2,12 +2,14 @@
 version: '3'
 services:
   flask:
-    container_name: fail2ban_iec
-    image: fail2ban_iec
+    container_name: fail2ban-telegram
+    image: fail2ban_iec:alpine
+    restart: unless-stopped
+#    read_only: true
     build:
       context: .
-      dockerfile: dockerfile_alpine_fail2ban_iec
-    command: gunicorn --bind 0.0.0.0:5000 fail2ban:app
+      dockerfile: dockerfile_fail2ban_iec
+#    command: gunicorn --bind 0.0.0.0:5000 fail2ban:app
     volumes:
     - "./:/app"
     ports:
