@@ -3,7 +3,7 @@ from ipaddress import ip_address
 
 import requests
 from flask import request
-from werkzeug.exceptions import BadRequest, abort
+from werkzeug.exceptions import BadRequest
 
 
 def get_ip(request):
@@ -31,7 +31,7 @@ def find_in_request(filtro):
 
 def verify_ip_format(ip):
     try:
-        result = ip_address(ip)
+        result = ip_address(ip).__str__()
     except ValueError as e:
         raise BadRequest(f'Invalid input. {str(e)}')
     return result
