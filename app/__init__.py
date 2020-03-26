@@ -22,8 +22,3 @@ app.register_blueprint(telegram_restful)
 from app.errors import errors
 
 app.register_blueprint(errors)
-
-# Registra a Blueprint do monitoringdashboard
-from app.dashboard import dash
-
-app.register_blueprint(dash)
