@@ -27,8 +27,8 @@ def filtro_post(content_type):
 
         try:
             texto.update(protocol=request_json['protocol'])
-            texto.update(origin_ip=request_json['origin_ip'])
-            texto.update(target_ip=request_json['target_ip'])
+            texto.update(origin_ip=verify_ip_format(request_json['origin_ip']))
+            texto.update(target_ip=verify_ip_format(request_json['target_ip']))
             texto.update(origin_country=country_ip(request_json['origin_ip']))
         except Exception:
             raise BadRequest(
