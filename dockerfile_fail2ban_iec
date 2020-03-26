@@ -1,12 +1,16 @@
-FROM python:3
+FROM python:rc-alpine3.10
+
+LABEL maintainer="Pedro Sousa <ppls2106@gmail.com>"
+
+RUN apk update
+
+RUN apk add gcc musl-dev libffi-dev openssl-dev
+
+RUN pip3 install --upgrade pip
 
 WORKDIR /usr/src/app
 
 COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip3 install --no-cache-dir -r requirements.txt
 
 COPY . .
-
-EXPOSE 5000
-
-CMD [ "flask", "run" ]
