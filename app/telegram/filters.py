@@ -8,7 +8,8 @@ def filtro_post(content_type):
     data = str(request.data).replace('b\'', '').replace('\'', '')
     if data is None or len(data) < 1:
         '''condicao para entrada vazia'''
-        raise BadRequest('Invalid Input! Entry cannot be empty')
+        msg = 'Invalid Input! Entry cannot be empty'
+        raise BadRequest(msg)
 
     texto = {}
     if 'text/plain' in content_type:
@@ -20,7 +21,9 @@ def filtro_post(content_type):
             texto.update(target_ip=verify_ip_format(split_request[2]))
             texto.update(origin_country=country_ip(split_request[1]))
         else:
-            raise BadRequest('Invalid Input! The entry must be: protocol, origin_ip, target_ip')
+            msg = 'Invalid Input! The entry must be a text/plain with content in this order: protocol, origin_ip, ' \
+                  'target_ip '
+            raise BadRequest(msg)
 
     elif 'application/json' in content_type:
         request_json = request.json
@@ -31,11 +34,6 @@ def filtro_post(content_type):
             texto.update(target_ip=verify_ip_format(request_json['target_ip']))
             texto.update(origin_country=country_ip(request_json['origin_ip']))
         except Exception:
-            raise BadRequest(
-                'Invalid Input! The entry must be:  '
-                '{'
-                '"protocol": "protocol_name",'
-                ' "origin_ip": "ip",'
-                ' "target_ip": "ip"'
-                '}')
+            msg = 'Invalid Input! The entry must be JSON with keys: protocol, origin_ip and target_ip'
+            raise BadRequest(msg)
     return texto

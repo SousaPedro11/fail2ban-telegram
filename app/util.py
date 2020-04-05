@@ -33,5 +33,6 @@ def verify_ip_format(ip):
     try:
         result = ip_address(ip).__str__()
     except ValueError as e:
-        raise BadRequest(f'Invalid input. {str(e)}')
+        msg = f'Invalid input. {str(e)}'
+        raise BadRequest(msg)
     return result
