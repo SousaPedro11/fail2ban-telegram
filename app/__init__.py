@@ -19,6 +19,6 @@ from app.telegram import telegram_restful
 app.register_blueprint(telegram_restful)
 
 # Registra a Blueprint do errorhandler
-from app.errors import errors
+from app.errors import errors_bp
 
-app.register_blueprint(errors)
+app.register_blueprint(errors_bp)

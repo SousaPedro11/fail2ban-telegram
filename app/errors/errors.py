@@ -1,10 +1,11 @@
 import json
 
-from app import app
+from werkzeug.exceptions import HTTPException
 
-from werkzeug.exceptions import InternalServerError
+from app.errors import errors_bp
 
 
+@errors_bp.errorhandler(HTTPException)
 def handle_exception(e):
     """Return JSON instead of HTML for HTTP errors."""
     # start with the correct headers and status code from the error
@@ -18,5 +19,4 @@ def handle_exception(e):
     response.content_type = "application/json"
     return response
 
-
-app.register_error_handler(InternalServerError, handle_exception)
+# app.register_error_handler(InternalServerError, handle_exception)
