@@ -22,6 +22,7 @@ Rest API feita em Flask para notificar via Telegram os eventos do Fail2ban.
 * gunicorn 20.0.4
 
 ## Preparação do Ambiente
+### Criar os arquivos contendo as variáveis de ambitente
 ### Para executar em localhost na própria máquina
 * Instale o Python 3
 * Instale o pip
