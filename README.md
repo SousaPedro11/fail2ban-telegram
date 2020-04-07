@@ -23,6 +23,12 @@ Rest API feita em Flask para notificar via Telegram os eventos do Fail2ban.
 
 ## Preparação do Ambiente
 ### Criar os arquivos contendo as variáveis de ambitente
+* Copiar os templates de arquivos:
+```shell script
+cp flaskenv_example .flaskenv && cp env_example .env
+```
+* Substituir os valores correspondentes às variáveis
+
 ### Para executar em localhost na própria máquina
 * Instale o Python 3
 * Instale o pip
