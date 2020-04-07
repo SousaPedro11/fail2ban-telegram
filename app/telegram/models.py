@@ -1,6 +1,6 @@
 import os
 
-from flask import request, jsonify
+from flask import request, jsonify, current_app
 from flask_restful import Resource
 from telegram import Bot
 
@@ -19,7 +19,8 @@ class Telegram(Resource):
         texto = {}
         texto.update(country_ip=country_ip(ip))
         texto.update(user_agent=request.user_agent.string)
-        bot.send_message(chat_id=chat_id, text=texto)
+        if not current_app.debug and not current_app.testing:
+            bot.send_message(chat_id=chat_id, text=texto)
         return jsonify(texto)
 
     def post(self):

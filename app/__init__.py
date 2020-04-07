@@ -1,14 +1,14 @@
 from flask import Flask
 from flask_restful import Api
 
-from config import BaseConfig
+from config import Config
 
 api = Api()
 
 
-def create_app():
+def create_app(config_class=Config):
     app = Flask(__name__)
-    app.config.from_object(BaseConfig)
+    app.config.from_object(config_class)
 
     # Registra a Blueprint de HTTPAuth
     from app.authorization import http_auth
