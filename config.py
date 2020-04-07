@@ -1,9 +1,8 @@
 import os
 
-from dotenv import load_dotenv, set_key
+from dotenv import set_key
 
 basedir = os.path.abspath(os.path.dirname(__file__))
-load_dotenv(os.path.join(basedir, '.env'))
 
 
 class Config(object):
@@ -15,7 +14,6 @@ class Config(object):
 
 class Development(Config):
     DEBUG = True
-    set_key(os.path.join(basedir, '.env'), 'FLASK_ENV', 'development')
 
 
 class Testing(Config):
