@@ -22,7 +22,7 @@ Rest API feita em Flask para notificar via Telegram os eventos do Fail2ban.
 * gunicorn 20.0.4
 
 ## Preparação do Ambiente
-### Para executar em localhost
+### Para executar em localhost na própria máquina
 * Instale o Python 3
 * Instale o pip
 * Atualize o pip
@@ -40,3 +40,42 @@ source ./venv/bin/activate
 pip install -r requirements.txt
 ```
 
+### Em Docker
+* Instale o Docker e Docker-compose
+* Crie a imagem a partir do DOCKERFILE (dockerfile_fail2ban_iec):
+```shell script
+docker build -f ./dockerfile_fail2ban_iec -t fail2ban:alpine .
+```
+
+## Executar a aplicação
+### Na própria máquina pelo terminal
+* Sem o servidor WSGI
+```shell script
+flask run
+```
+ou
+```shell script
+python -m flask run
+```
+
+* Com o servidor WSGI
+```shell script
+gunicorn --workers=5 --bind=0.0.0.0:5000 --access-logfile - --error-logfile - 'fail2ban:create_app()'
+```
+ou execute o *startup.sh* (deve estar habilitado para execução)
+```shell script
+./startup.sh
+```
+### Em docker (após criada a imagem)
+```shell script
+docker run --name fail2ban-telegram -p 5000:5000 --restart=unless-stopped -d fail2ban:alpine
+```
+### Em docker-compose
+* Para criar e executar a aplicalçao
+```shell script
+docker-compose -f fail2ban_iec.yml up --build -d --remove-orphans
+```
+* Para derrubar e remover container + imagem
+```shell script
+docker-compose -f fail2ban_iec.yml down --rmi all -v --remove-orphans
+```
