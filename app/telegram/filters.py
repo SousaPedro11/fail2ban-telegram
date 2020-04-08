@@ -1,7 +1,7 @@
 from flask import request
 from werkzeug.exceptions import BadRequest
 
-from app.util import country_ip, verify_ip_format
+from app.util import country_ip, verify_ip_format, verify_protocol
 
 
 def filtro_post(content_type):
@@ -16,7 +16,7 @@ def filtro_post(content_type):
         split_request = [i.lstrip() for i in data.split(",")]
         if len(split_request) == 3:
             '''condicao para entrada: protocol, origin_ip, target_ip'''
-            texto.update(protocol=split_request[0])
+            texto.update(protocol=verify_protocol(split_request[0]))
             texto.update(origin_ip=verify_ip_format(split_request[1]))
             texto.update(target_ip=verify_ip_format(split_request[2]))
             texto.update(origin_country=country_ip(split_request[1]))
@@ -29,11 +29,13 @@ def filtro_post(content_type):
         request_json = request.json
 
         try:
-            texto.update(protocol=request_json['protocol'])
+            texto.update(protocol=verify_protocol(request_json['protocol']))
             texto.update(origin_ip=verify_ip_format(request_json['origin_ip']))
             texto.update(target_ip=verify_ip_format(request_json['target_ip']))
             texto.update(origin_country=country_ip(request_json['origin_ip']))
-        except Exception:
+        except BadRequest as br:
+            raise BadRequest(br.description)
+        except KeyError:
             msg = 'Invalid Input! The entry must be JSON with keys: protocol, origin_ip and target_ip'
             raise BadRequest(msg)
     return texto

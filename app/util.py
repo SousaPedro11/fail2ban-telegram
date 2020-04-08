@@ -36,3 +36,7 @@ def verify_ip_format(ip):
         msg = f'Invalid input. {str(e)}'
         raise BadRequest(msg)
     return result
+
+
+def verify_protocol(protocol):
+    return protocol
