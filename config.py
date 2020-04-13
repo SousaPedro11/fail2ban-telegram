@@ -1,7 +1,5 @@
 import os
 
-from dotenv import set_key
-
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 

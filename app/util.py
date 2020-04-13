@@ -1,8 +1,6 @@
-import re
 from ipaddress import ip_address
 
 import requests
-from flask import request
 from werkzeug.exceptions import BadRequest
 
 
@@ -23,10 +21,6 @@ def country_ip(ip) -> str:
         'country'] if 'country' in parsed_json.keys() else f'{parsed_json["status"]}, {parsed_json["message"]}'
 
     return texto
-
-
-def find_in_request(filtro):
-    return re.compile(filtro).findall(str(request.data))
 
 
 def verify_ip_format(ip):

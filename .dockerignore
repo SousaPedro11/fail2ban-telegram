@@ -9,3 +9,6 @@ Procfile
 ./dockerfile*
 LICENSE
 README.md
+.pytest_cache/
+env_example
+flaskenv_example
