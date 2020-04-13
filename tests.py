@@ -10,8 +10,8 @@ load_dotenv('.env')
 
 @pytest.fixture
 def url():
-    # return 'http://localhost:5000/'
-    return 'https://fail2ban-telegram.herokuapp.com/'
+    return 'http://localhost:5000/'
+
 
 @pytest.fixture
 def auth():
