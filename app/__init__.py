@@ -6,9 +6,9 @@ from config import Config
 api = Api()
 
 
-def create_app(config_class=Config):
+def create_app(config_name='config.Config'):
     app = Flask(__name__)
-    app.config.from_object(config_class)
+    app.config.from_object(config_name)
 
     # Registra a Blueprint de HTTPAuth
     from app.authorization import http_auth

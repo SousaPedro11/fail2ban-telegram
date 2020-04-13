@@ -40,7 +40,7 @@ def test_post_authorized_empty(url, auth):
     assert response.status_code == 400
 
 
-def test_post_authorized_onlyoriginip(url, auth):
+def test_post_authorized_only_origin(url, auth):
     json = {
         'origin_ip': '200.68.3.2'
     }
@@ -49,7 +49,7 @@ def test_post_authorized_onlyoriginip(url, auth):
     assert response.status_code == 400
 
 
-def test_post_authorized_notprotocol(url, auth):
+def test_post_authorized_no_protocol(url, auth):
     json = {
         'origin_ip': '200.68.3.2',
         'target_ip': '209.67.4.2'
@@ -59,7 +59,7 @@ def test_post_authorized_notprotocol(url, auth):
     assert response.status_code == 400
 
 
-def test_post_authorized_notorigin(url, auth):
+def test_post_authorized_no_origin(url, auth):
     json = {
         'target_ip': '209.67.4.2',
         'protocol': 'postgres_sql'
@@ -69,7 +69,7 @@ def test_post_authorized_notorigin(url, auth):
     assert response.status_code == 400
 
 
-def test_post_authorized_nottarget(url, auth):
+def test_post_authorized_no_target(url, auth):
     json = {
         'origin_ip': '209.67.4.2',
         'protocol': 'postgres_sql'
@@ -79,7 +79,7 @@ def test_post_authorized_nottarget(url, auth):
     assert response.status_code == 400
 
 
-def test_post_authorized_invalidip(url, auth):
+def test_post_authorized_invalid_ip(url, auth):
     json = {
         'origin_ip': '200.68.3.',
         'target_ip': '209.67.4.2',
@@ -88,3 +88,25 @@ def test_post_authorized_invalidip(url, auth):
     response = requests.post(url=url, auth=auth, json=json)
     print(response.content)
     assert response.status_code == 400
+
+
+def test_post_authorized_invalid_protocol(url, auth):
+    json = {
+        'origin_ip': '200.68.3.7',
+        'target_ip': '209.67.4.2',
+        'protocol': '158264'
+    }
+    response = requests.post(url=url, auth=auth, json=json)
+    print(response.content)
+    assert response.status_code == 400
+
+
+def test_post_authorized_valid(url, auth):
+    json = {
+        'origin_ip': '200.68.3.7',
+        'target_ip': '209.67.4.2',
+        'protocol': 'postgres_sql'
+    }
+    response = requests.post(url=url, auth=auth, json=json)
+    print(response.content)
+    assert response.status_code == 200

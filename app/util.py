@@ -33,10 +33,11 @@ def verify_ip_format(ip):
     try:
         result = ip_address(ip).__str__()
     except ValueError as e:
-        msg = f'Invalid input. {str(e)}'
-        raise BadRequest(msg)
+        raise BadRequest(f'Invalid input. {str(e)}')
     return result
 
 
 def verify_protocol(protocol):
+    if protocol.isdecimal():
+        raise BadRequest(f'Invalid input. Protocol must be a string')
     return protocol
