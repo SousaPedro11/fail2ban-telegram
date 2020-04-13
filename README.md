@@ -10,16 +10,16 @@ Rest API feita em Flask para notificar via Telegram os eventos do Fail2ban.
 * Executar em container Docker
 
 ## Tecnologias e Recursos
-* Python 3.8
-* pip 20.0.2
-* Flask 1.1
-* python-dotenv 0.12.0
-* Flask-HTTPAuth 3.3.0
-* Flask-RESTful 0.3.8
-* python-telegram-bot 12.4.2
-* requests 2.23.0
-* pytest 5.4.1
-* gunicorn 20.0.4
+* [Python 3.8.2](https://www.python.org/)
+* [pip 20.0.2](https://pip.pypa.io/en/stable/)
+* [Flask 1.1.2](https://flask.palletsprojects.com/en/1.1.x/)
+* [python-dotenv 0.12.0](https://github.com/theskumar/python-dotenv)
+* [Flask-HTTPAuth 3.3.0](https://flask-httpauth.readthedocs.io/en/latest/)
+* [Flask-RESTful 0.3.8](https://flask-restful.readthedocs.io/en/latest/)
+* [python-telegram-bot 12.4.2](https://python-telegram-bot.readthedocs.io/en/stable/)
+* [requests 2.23.0](https://requests.readthedocs.io/en/master/)
+* [pytest 5.4.1](https://docs.pytest.org/en/latest/contents.html)
+* [gunicorn 20.0.4](https://gunicorn.org/)
 
 ## Preparação do Ambiente
 ### Criar os arquivos contendo as variáveis de ambitente
