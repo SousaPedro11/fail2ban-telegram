@@ -13,4 +13,4 @@ __senha = os.environ.get('HTTPAUTH_PASS')
 def verify_password(username, password):
     if username == __usuario:
         return check_password_hash(generate_password_hash(__senha), password)
-    raise Unauthorized
+    raise False
