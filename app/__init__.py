@@ -1,16 +1,26 @@
 from flask import Flask
 from flask_restful import Api
 from config import config
+from flask_migrate import Migrate
 
 from app.event.models import db as event_db
 
 api = Api()
+migrate = Migrate()
 
 
-def create_app(config_name:str):
+def create_app(config_name:str = None):
     app = Flask(__name__)
+    
+    if config_name is None:
+        config_name = 'prod'
+
     app.config.from_object(config[config_name])
+
     event_db.init_app(app)
+    
+    migrate.init_app(app=app, db=event_db)
+    
     with app.app_context():
         event_db.create_all()
     

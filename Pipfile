@@ -15,6 +15,7 @@ python-telegram-bot = "*"
 requests = "*"
 pytest = "*"
 gunicorn = "*"
+flask-migrate = "*"
 
 [requires]
 python_version = "3.8"

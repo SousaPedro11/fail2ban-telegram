@@ -19,7 +19,7 @@ infos = db.Table('infos',
 class IPAddress(db.Model):
     __tablename__ = 'ip_address'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    ip_addr = db.Column(db.String(45), unique=True, nulable=False)
+    ip_addr = db.Column(db.String(45), unique=True, nullable=False)
     region = db.Column(db.String(20))
     
     logs = db.relationship('Log', backref='ip_address', lazy=True)
@@ -37,9 +37,9 @@ class IPAddress(db.Model):
 class Log(db.Model):
     __tablename__ = 'logs'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    event_moment = db.Column(db.DATETIME, default=datetime.now, nulable=False)
+    event_moment = db.Column(db.DATETIME, default=datetime.now, nullable=False)
     protocol = db.Column(db.String(20), nullable=False)
-    origin_ip = db.Column(db.Integer, db.ForeignKey('ip_address.id'), nulable=False)
+    origin_ip = db.Column(db.Integer, db.ForeignKey('ip_address.id'), nullable=False)
 
     def __init__(self, event_moment, protocol, origin_ip):
         self.event_moment = event_moment
