@@ -1,4 +1,6 @@
 import os
+from dotenv import load_dotenv
+
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -7,7 +9,6 @@ class Config(object):
     DEBUG = False
     TESTING = False
     SECRET_KEY = os.environ.get('SECRET_KEY')
-    # set_key(os.path.join(basedir, '.env'), 'FLASK_ENV', 'production')
 
 
 class Development(Config):
@@ -16,3 +17,18 @@ class Development(Config):
 
 class Testing(Config):
     TESTING = True
+
+
+class Production(Config):
+    load_dotenv(os.path.join(basedir, '.env'))  
+# TOKEN = os.environ.get('TOKEN')
+# CHAT_ID = os.environ.get('CHAT_ID')
+# HTTPAUTH_USER = os.environ.get('HTTPAUTH_USER')
+# HTTPAUTH_PASS = os.environ.get('HTTPAUTH_PASS')
+    
+    
+config = {
+    'dev': Development,
+    'test': Testing,
+    'prod': Production,
+}
