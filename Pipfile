@@ -1,0 +1,43 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+aniso8601 = "*"
+attrs = "*"
+certifi = "*"
+cffi = "*"
+chardet = "*"
+click = "*"
+cryptography = "*"
+decorator = "*"
+future = "*"
+gunicorn = "*"
+idna = "*"
+itsdangerous = "*"
+more-itertools = "*"
+pluggy = "*"
+py = "*"
+pycparser = "*"
+pyparsing = "*"
+pytest = "*"
+python-dotenv = "*"
+python-telegram-bot = "*"
+pytz = "*"
+requests = "*"
+six = "*"
+tornado = "*"
+urllib3 = "*"
+wcwidth = "*"
+Flask = "*"
+Flask-HTTPAuth = "*"
+Flask-RESTful = "*"
+Jinja2 = "*"
+MarkupSafe = "*"
+Werkzeug = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.8"
