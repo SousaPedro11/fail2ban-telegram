@@ -1,7 +1,7 @@
 from flask import request
 from werkzeug.exceptions import BadRequest
 
-from app.util import country_ip, verify_ip_format, verify_protocol
+from app.util import data_from_ip, verify_ip_format, verify_protocol
 
 
 def filtro_post(content_type):
@@ -19,7 +19,7 @@ def filtro_post(content_type):
             texto.update(protocol=verify_protocol(split_request[0]))
             texto.update(origin_ip=verify_ip_format(split_request[1]))
             texto.update(target_ip=verify_ip_format(split_request[2]))
-            texto.update(origin_country=country_ip(split_request[1]))
+            texto.update(**data_from_ip(split_request[1]))
         else:
             msg = 'Invalid Input! The entry must be a text/plain with content in this order: protocol, origin_ip, ' \
                   'target_ip '
@@ -32,7 +32,7 @@ def filtro_post(content_type):
             texto.update(protocol=verify_protocol(request_json['protocol']))
             texto.update(origin_ip=verify_ip_format(request_json['origin_ip']))
             texto.update(target_ip=verify_ip_format(request_json['target_ip']))
-            texto.update(origin_country=country_ip(request_json['origin_ip']))
+            texto.update(**data_from_ip(request_json['origin_ip']))
         except BadRequest as br:
             raise BadRequest(br.description)
         except KeyError:

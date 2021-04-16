@@ -13,12 +13,12 @@ def get_ip(request):
     return ip
 
 
-def country_ip(ip) -> str:
+def data_from_ip(ip) -> dict:
     r = requests.get('http://ip-api.com/json/' + ip)
     parsed_json = r.json()
 
-    texto = f"{parsed_json['country']}, {parsed_json['regionName'], parsed_json['city']}"\
-        if 'country' in parsed_json.keys() else f'{parsed_json["status"]}, {parsed_json["message"]}'
+    texto = {'country': parsed_json['country'], 'regionName': parsed_json['regionName'], 'city': parsed_json['city']} \
+        if 'country' in parsed_json.keys() else {'status': parsed_json["status"], 'message': parsed_json["message"]}
 
     return texto
 

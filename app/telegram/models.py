@@ -3,7 +3,7 @@ from flask_restful import Resource
 
 from app.telegram import filters
 from app.telegram.bot import send_message
-from app.util import get_ip, country_ip
+from app.util import get_ip, data_from_ip
 
 
 class Telegram(Resource):
@@ -12,7 +12,7 @@ class Telegram(Resource):
         ip = get_ip(request)
         texto = {}
         texto.update(ip=ip)
-        texto.update(country_ip=country_ip(ip))
+        texto.update(**data_from_ip(ip))
         texto.update(user_agent=request.user_agent.string)
 
         send_message(texto)
