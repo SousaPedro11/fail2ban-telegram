@@ -11,6 +11,7 @@ class Telegram(Resource):
     def get(self):
         ip = get_ip(request)
         texto = {}
+        texto.update(ip=ip)
         texto.update(country_ip=country_ip(ip))
         texto.update(user_agent=request.user_agent.string)
 
