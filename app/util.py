@@ -14,7 +14,7 @@ def get_ip(request):
 
 
 def country_ip(ip) -> str:
-    r = requests.get('https://ip-api.com/json/' + ip)
+    r = requests.get('http://ip-api.com/json/' + ip)
     parsed_json = r.json()
 
     texto = f"{parsed_json['country']}, {parsed_json['regionName'], parsed_json['city']}"\
